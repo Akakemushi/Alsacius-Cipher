@@ -5,6 +5,34 @@ def replace_combinations(text, replacements)
   text
 end
 
+def replace_two_letters(text, replacements)
+  word_array = text.split()
+  altered_array = []
+  letter_counter = 0
+  word_array.each do |word|
+    characters = word.chars
+    characters.each do |char|
+      if char.match?(/[a-zA-Z]/)
+        letter_counter += 1
+      end
+    end
+    if letter_counter == 2
+      characters.each_with_index do |char, index|
+        if char.match?(/[a-zA-Z]/)
+          characters[index] = replacements[char]
+        end
+      end
+      new_word = characters.join
+      altered_array << new_word
+      letter_counter = 0
+    else
+      altered_array << word
+      letter_counter = 0
+    end
+  end
+  changed_string = altered_array.join(" ")
+end
+
 def single_pass_replace(text, replacements)
   letter_array = text.chars
   substituted_message = letter_array.map do |letter|
@@ -18,7 +46,7 @@ def single_pass_replace(text, replacements)
 end
 
 def four_five_letter_rule(text)
-  word_array = text.split(" ")
+  word_array = text.split()
   altered_array = []
   letter_counter = 0
   toggle = true
@@ -59,7 +87,7 @@ def four_five_letter_rule(text)
 end
 
 def scramble_rule(text)
-  word_array = text.split(" ")
+  word_array = text.split()
   altered_array = []
   letter_counter = 0
   second_letter_index = 0
@@ -164,11 +192,17 @@ replacements2 = {
 
 puts "Write your message:"
 message = gets.chomp
-modified_message = replace_combinations(message, replacements1)
+modified_message = replace_two_letters(message, replacements2)
 puts modified_message
+puts ""
+modified_message = replace_combinations(modified_message, replacements1)
+puts modified_message
+puts ""
 modified_message = single_pass_replace(modified_message, replacements2)
 puts modified_message
+puts ""
 modified_message = four_five_letter_rule(modified_message)
 puts modified_message
+puts ""
 modified_message = scramble_rule(modified_message)
 puts modified_message
