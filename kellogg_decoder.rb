@@ -37,24 +37,29 @@ def four_five_letter_rule(text)
   word_array = text.split()
   altered_array = []
   letter_counter = 0
+  first_letter_index = 0
   second_letter_index = 0
   word_array.each do |word|
-    characters = word.chars
-    if characters[0].match?(/[Ç]/)
-      characters.each_with_index do |char, index|
-        if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆÇ]/)
-          letter_counter += 1
-          if letter_counter == 2
-            second_letter_index = index
+    if word.match?(/^[^Ç]*Ç[^Ç]*$/)
+      characters = word.chars
+        characters.each_with_index do |char, index|
+          if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆÇ]/)
+            letter_counter += 1
+            if letter_counter == 1
+              first_letter_index = index
+            end
+            if letter_counter == 2
+              second_letter_index = index
+            end
           end
         end
-      end
-      characters[second_letter_index] = characters[second_letter_index].upcase
-      characters.delete_at(0)
-      letter_counter = 0
-      second_letter_index = 0
-      new_word = characters.join
-      altered_array << new_word
+        characters[second_letter_index] = characters[second_letter_index].upcase
+        characters.delete_at(first_letter_index)
+        letter_counter = 0
+        first_letter_index = 0
+        second_letter_index = 0
+        new_word = characters.join
+        altered_array << new_word
     else
       altered_array << word
     end

@@ -49,38 +49,45 @@ def four_five_letter_rule(text)
   word_array = text.split()
   altered_array = []
   letter_counter = 0
+  first_letter_index = 0
   toggle = true
   capital_letter_present = false
   word_array.each do |word|
     characters = word.chars
-    if characters[0].match?(/[A-ZÏÙÃÑÉÆ]/)
-      capital_letter_present = true
-    end
-    characters.each do |char|
+    # if characters[0].match?(/[A-ZÏÙÃÑÉÆ]/)
+    #   capital_letter_present = true
+    # end
+    characters.each_with_index do |char, index|
       if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆ]/)
         letter_counter += 1
+        if letter_counter == 1
+          first_letter_index = index
+          if char.match?(/[A-ZÏÙÃÑÉÆ]/)
+            capital_letter_present = true
+          end
+        end
       end
     end
     if (letter_counter == 4 || letter_counter == 5) && toggle
-      rand = rand(letter_counter + 1)
-      if rand == 0 && capital_letter_present
-        characters[0] = characters[0].downcase
+      rand = rand(first_letter_index..letter_counter + 1)
+      if rand == first_letter_index && capital_letter_present
+        characters[first_letter_index] = characters[first_letter_index].downcase
         characters.insert(rand, "Ç")
       else
         characters.insert(rand, "ç")
       end
       new_word = characters.join
       altered_array << new_word
-      letter_counter = 0
+
       toggle = !toggle
     elsif letter_counter == 4 || letter_counter == 5
       altered_array << word
-      letter_counter = 0
       toggle = !toggle
     else
       altered_array << word
-      letter_counter = 0
     end
+    letter_counter = 0
+    first_letter_index = 0
     capital_letter_present = false
   end
   changed_string = altered_array.join(" ")
