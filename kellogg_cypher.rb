@@ -244,24 +244,41 @@ replacements2 = {
 
 replacements3 = {
   'can\'t' => 'šcannot',
-  'don\'t' => 'šdo not',
+  'n\'t' => ' šnot',
   '\'re' => ' šare',
   '\'m' => ' šam',
   '\'ll' => ' šwill',
   '\'d' => ' šwould',
-  'Can\'t' => 'Cannotš',
-  'Don\'t' => 'Do notš',
-  'CAN\'T' => 'CANNOTŠ',
-  'DON\'T' => 'DO NOTŠ',
-  '\'RE' => ' AREŠ',
-  '\'M' => ' AMŠ',
-  '\'LL' => ' WILLŠ',
-  '\'D' => ' WOULDŠ'
+  '\'ve' => ' šhave',
+  'Can\'t' => 'Šcannot',
+  'CAN\'T' => 'ŠCANNOT',
+  'N\'T' => ' ŠNOT',
+  '\'RE' => ' ŠARE',
+  '\'M' => ' ŠAM',
+  '\'LL' => ' ŠWILL',
+  '\'D' => ' ŠWOULD',
+  '\'VE' => ' ŠHAVE',
+  'can’t' => 'šcannot',
+  'n’t' => ' šnot',
+  '’re' => ' šare',
+  '’m' => ' šam',
+  '’ll' => ' šwill',
+  '’d' => ' šwould',
+  '’ve' => ' šhave',
+  'Can’t' => 'Šcannot',
+  'CAN’T' => 'ŠCANNOT',
+  'N’T' => ' ŠNOT',
+  '’RE' => ' ŠARE',
+  '’M' => ' ŠAM',
+  '’LL' => ' ŠWILL',
+  '’D' => ' ŠWOULD',
+  '’VE' => ' ŠHAVE'
 }
 
 
 puts "Write your message:"
 message = gets.chomp
+puts ""
 modified_message = replace_key_words(message)
 puts modified_message
 puts ""

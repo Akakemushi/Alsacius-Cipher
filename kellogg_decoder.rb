@@ -226,19 +226,20 @@ replacements2 = {
 
 replacements3 = {
   'šcannot' => 'can\'t',
-  'šdo not' => 'don\'t',
+  ' šnot' => 'n\'t',
   ' šare' => '\'re',
   ' šam' => '\'m',
   ' šwill' => '\'ll',
   ' šwould' => '\'d',
-  'Cannotš' => 'Can\'t',
-  'Do notš' => 'Don\'t',
-  'CANNOTŠ' => 'CAN\'T',
-  'DO NOTŠ' => 'DON\'T',
-  ' AREŠ' => '\'RE',
-  ' AMŠ' => '\'M',
-  ' WILLŠ' => '\'LL',
-  ' WOULDŠ' => '\'D'
+  ' šhave' => '\'ve',
+  'Šcannot' => 'Can\'t',
+  'ŠCANNOT' => 'CAN\'T',
+  ' ŠNOT' => 'N\'T',
+  ' ŠARE' => '\'RE',
+  ' ŠAM' => '\'M',
+  ' ŠWILL' => '\'LL',
+  ' ŠWOULD' => '\'D',
+  ' ŠHAVE' => '\'VE'
 }
 
 puts "Write your message:"
