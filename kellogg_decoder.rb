@@ -1,3 +1,43 @@
+def replace_key_words(text)
+  text = text.gsub("ø", "the")
+  text = text.gsub("Ø", "The")
+  word_array = text.split()
+  altered_array = []
+  letter_counter = 0
+  word_array.each do |word|
+    characters = word.chars
+    characters.each do |char|
+      if char.match?(/[a-zA-Z]/)
+        letter_counter += 1
+      end
+    end
+    if letter_counter == 1
+      if word.match?(/~[a-zA-Z]~/)
+        new_word = word.gsub(/~([a-zA-Z])~/, '\1')
+        altered_array << new_word
+        letter_counter = 0
+      else
+        characters.each_with_index do |char, index|
+          if char.match?(/[a-m]/)
+            characters[index] = "I"
+          elsif char.match?(/(?<!~)[n-z](?!~)/)
+            characters[index] = "a"
+          elsif char.match?(/(?<!~)[N-Z](?!~)/)
+            characters[index] = "A"
+          end
+        end
+        new_word = characters.join
+        altered_array << new_word
+        letter_counter = 0
+      end
+    else
+      altered_array << word
+      letter_counter = 0
+    end
+  end
+  changed_string = altered_array.join(" ")
+end
+
 def scramble_rule(text)
   word_array = text.split()
   altered_array = []
@@ -184,6 +224,23 @@ replacements2 = {
   'N' => 'Z'
 }
 
+replacements3 = {
+  'šcannot' => 'can\'t',
+  'šdo not' => 'don\'t',
+  ' šare' => '\'re',
+  ' šam' => '\'m',
+  ' šwill' => '\'ll',
+  ' šwould' => '\'d',
+  'Cannotš' => 'Can\'t',
+  'Do notš' => 'Don\'t',
+  'CANNOTŠ' => 'CAN\'T',
+  'DO NOTŠ' => 'DON\'T',
+  ' AREŠ' => '\'RE',
+  ' AMŠ' => '\'M',
+  ' WILLŠ' => '\'LL',
+  ' WOULDŠ' => '\'D'
+}
+
 puts "Write your message:"
 message = gets.chomp
 modified_message = scramble_rule(message)
@@ -200,4 +257,10 @@ modified_message = replace_combinations(modified_message, replacements1)
 puts modified_message
 puts ""
 modified_message = replace_two_letters(modified_message, replacements2)
+puts modified_message
+puts ""
+modified_message = replace_combinations(modified_message, replacements3)
+puts modified_message
+puts ""
+modified_message = replace_key_words(modified_message)
 puts modified_message

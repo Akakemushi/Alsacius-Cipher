@@ -1,3 +1,48 @@
+def replace_key_words(text)
+  word_array = text.split()
+  altered_array = []
+  letter_counter = 0
+  word_array.each do |word|
+    characters = word.chars
+    characters.each do |char|
+      if char.match?(/[a-zA-Z]/)
+        letter_counter += 1
+      end
+    end
+    if letter_counter == 1
+      characters.each_with_index do |char, index|
+        if char.match?(/[iI]/)
+          random_letter = ('a'..'m').to_a.sample
+          characters[index] = random_letter
+        elsif char.match?(/[a]/)
+          random_letter = ('n'..'z').to_a.sample
+          characters[index] = random_letter
+        elsif char.match?(/[A]/)
+          random_letter = ('N'..'Z').to_a.sample
+          characters[index] = random_letter
+        elsif char.match?(/[a-zA-Z]/)
+          characters[index] = "~#{characters[index]}~"
+        end
+      end
+      new_word = characters.join
+      altered_array << new_word
+      letter_counter = 0
+    elsif letter_counter == 3
+      if word.match?(/^[\W]*the[\W]*$/)
+        word = word.gsub("the", "ø")
+      elsif word.match?(/^[\W]*The[\W]*$/)
+        word = word.gsub("The", "Ø")
+      end
+      altered_array << word
+      letter_counter = 0
+    else
+      altered_array << word
+      letter_counter = 0
+    end
+  end
+  changed_string = altered_array.join(" ")
+end
+
 def replace_combinations(text, replacements)
   replacements.each do |find, replace|
     text = text.gsub(find, replace)
@@ -104,7 +149,7 @@ def scramble_rule(text)
     if (w_index + 1) % 4 == 0
       characters = word.chars
       characters.each_with_index do |char, c_index|
-        if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆçÇ]/)
+        if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆçÇøØ]/)
           letter_counter += 1
           final_letter_index = c_index
           if letter_counter == 2
@@ -197,9 +242,33 @@ replacements2 = {
   'Z' => 'N'
 }
 
+replacements3 = {
+  'can\'t' => 'šcannot',
+  'don\'t' => 'šdo not',
+  '\'re' => ' šare',
+  '\'m' => ' šam',
+  '\'ll' => ' šwill',
+  '\'d' => ' šwould',
+  'Can\'t' => 'Cannotš',
+  'Don\'t' => 'Do notš',
+  'CAN\'T' => 'CANNOTŠ',
+  'DON\'T' => 'DO NOTŠ',
+  '\'RE' => ' AREŠ',
+  '\'M' => ' AMŠ',
+  '\'LL' => ' WILLŠ',
+  '\'D' => ' WOULDŠ'
+}
+
+
 puts "Write your message:"
 message = gets.chomp
-modified_message = replace_two_letters(message, replacements2)
+modified_message = replace_key_words(message)
+puts modified_message
+puts ""
+modified_message = replace_combinations(modified_message, replacements3)
+puts modified_message
+puts ""
+modified_message = replace_two_letters(modified_message, replacements2)
 puts modified_message
 puts ""
 modified_message = replace_combinations(modified_message, replacements1)
