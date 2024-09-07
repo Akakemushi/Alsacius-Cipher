@@ -1,23 +1,27 @@
 def replace_key_words(text)
-  word_array = text.split()
+  word_array = text.split
   altered_array = []
   letter_counter = 0
-  word_array.each do |word|
+  word_array.each_with_index do |word, w_index|
     characters = word.chars
     characters.each do |char|
-      if char.match?(/[a-zA-Z]/)
-        letter_counter += 1
-      end
+      letter_counter += 1 if char.match?(/[a-zA-Z]/)
     end
+
     if letter_counter == 1
       characters.each_with_index do |char, index|
         if char.match?(/[iI]/)
           random_letter = ('a'..'m').to_a.sample
-          characters[index] = random_letter
-        elsif char.match?(/[a]/)
+          if word_array[w_index - 1].nil? || word_array[w_index - 1][-1].match?(/[.!?]/)
+            random_letter = random_letter.upcase
+            characters[index] = random_letter
+          else
+            characters[index] = random_letter
+          end
+        elsif char.match?(/a/)
           random_letter = ('n'..'z').to_a.sample
           characters[index] = random_letter
-        elsif char.match?(/[A]/)
+        elsif char.match?(/A/)
           random_letter = ('N'..'Z').to_a.sample
           characters[index] = random_letter
         elsif char.match?(/[a-zA-Z]/)
@@ -28,9 +32,9 @@ def replace_key_words(text)
       altered_array << new_word
       letter_counter = 0
     elsif letter_counter == 3
-      if word.match?(/^[\W]*the[\W]*$/)
+      if word.match?(/^\W*the\W*$/)
         word = word.gsub("the", "ø")
-      elsif word.match?(/^[\W]*The[\W]*$/)
+      elsif word.match?(/^\W*The\W*$/)
         word = word.gsub("The", "Ø")
       end
       altered_array << word

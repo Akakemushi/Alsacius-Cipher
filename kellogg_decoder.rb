@@ -18,7 +18,7 @@ def replace_key_words(text)
         letter_counter = 0
       else
         characters.each_with_index do |char, index|
-          if char.match?(/[a-m]/)
+          if char.match?(/[a-mA-M]/)
             characters[index] = "I"
           elsif char.match?(/(?<!~)[n-z](?!~)/)
             characters[index] = "a"
