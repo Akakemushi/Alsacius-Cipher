@@ -260,8 +260,9 @@ puts ""
 modified_message = replace_two_letters(modified_message, replacements2)
 puts modified_message
 puts ""
+modified_message = replace_key_words(modified_message)
+puts modified_message
+puts ""
 modified_message = replace_combinations(modified_message, replacements3)
 puts modified_message
 puts ""
-modified_message = replace_key_words(modified_message)
-puts modified_message
