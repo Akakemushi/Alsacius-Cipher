@@ -12,7 +12,7 @@ def replace_key_words(text)
       characters.each_with_index do |char, index|
         if char.match?(/[iI]/)
           random_letter = ('a'..'m').to_a.sample
-          if word_array[w_index - 1].nil? || word_array[w_index - 1][-1].match?(/[.!?]/)
+          if word_array[w_index - 1][-1].nil? || word_array[w_index - 1][-1].match?(/[.!?]/)
             random_letter = random_letter.upcase
             characters[index] = random_letter
           else
@@ -103,9 +103,6 @@ def four_five_letter_rule(text)
   capital_letter_present = false
   word_array.each do |word|
     characters = word.chars
-    # if characters[0].match?(/[A-ZÏÙÃÑÉÆ]/)
-    #   capital_letter_present = true
-    # end
     characters.each_with_index do |char, index|
       if char.match?(/[a-zA-ZïÏùÙãÃñÑéÉæÆ]/)
         letter_counter += 1
@@ -283,10 +280,10 @@ replacements3 = {
 puts "Write your message:"
 message = gets.chomp
 puts ""
-modified_message = replace_key_words(message)
+modified_message = replace_combinations(message, replacements3)
 puts modified_message
 puts ""
-modified_message = replace_combinations(modified_message, replacements3)
+modified_message = replace_key_words(modified_message)
 puts modified_message
 puts ""
 modified_message = replace_two_letters(modified_message, replacements2)
