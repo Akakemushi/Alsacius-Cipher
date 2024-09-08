@@ -55,7 +55,7 @@ def replace_combinations(text, replacements)
 end
 
 def replace_two_letters(text, replacements)
-  word_array = text.split()
+  word_array = text.split
   altered_array = []
   letter_counter = 0
   word_array.each do |word|
@@ -115,7 +115,7 @@ def four_five_letter_rule(text)
       end
     end
     if (letter_counter == 4 || letter_counter == 5) && toggle
-      rand = rand(first_letter_index..letter_counter + 1)
+      rand = rand(first_letter_index..letter_counter)
       if rand == first_letter_index && capital_letter_present
         characters[first_letter_index] = characters[first_letter_index].downcase
         characters.insert(rand, "Ç")
