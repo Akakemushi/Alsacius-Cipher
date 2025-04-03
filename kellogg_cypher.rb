@@ -279,24 +279,11 @@ replacements3 = {
 
 puts "Write your message:"
 message = gets.chomp
-puts ""
 modified_message = replace_combinations(message, replacements3)
-puts modified_message
-puts ""
 modified_message = replace_key_words(modified_message)
-puts modified_message
-puts ""
 modified_message = replace_two_letters(modified_message, replacements2)
-puts modified_message
-puts ""
 modified_message = replace_combinations(modified_message, replacements1)
-puts modified_message
-puts ""
 modified_message = single_pass_replace(modified_message, replacements2)
-puts modified_message
-puts ""
 modified_message = four_five_letter_rule(modified_message)
-puts modified_message
-puts ""
 modified_message = scramble_rule(modified_message)
 puts modified_message

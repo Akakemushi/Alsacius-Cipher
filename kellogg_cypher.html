@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cypher Tool</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script defer src="cypher.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Cypher Tool</h1>
+    <div class="tool-grid">
+      <!-- Encryption Section -->
+      <div class="tool-section">
+        <h2>Encrypt</h2>
+        <label for="input-text">Enter your message:</label>
+        <textarea id="input-text" maxlength="10000"></textarea>
+        <button id="encrypt-btn">Encrypt it!</button>
+
+        <div class="output">
+          <label for="output-text">Encrypted message:</label>
+          <div id="output-text" class="output-area"></div>
+          <div class="copy-btn">
+            <button id="copy-encrypt" aria-label="Copy to clipboard">
+              Copy <span class="clipboard-icon">📋</span>
+            </button>
+            <span class="tooltip">Copy to clipboard</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decryption Section -->
+      <div class="tool-section">
+        <h2>Decrypt</h2>
+        <label for="decrypt-input-text">Enter encrypted message:</label>
+        <textarea id="decrypt-input-text" maxlength="10000"></textarea>
+        <button id="decrypt-btn">Decrypt it!</button>
+
+        <div class="output">
+          <label for="decrypt-output-text">Decrypted message:</label>
+          <div id="decrypt-output-text" class="output-area"></div>
+          <div class="copy-btn">
+            <button id="copy-decrypt" aria-label="Copy to clipboard">
+              Copy <span class="clipboard-icon">📋</span>
+            </button>
+            <span class="tooltip">Copy to clipboard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
