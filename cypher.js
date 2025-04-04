@@ -135,27 +135,37 @@ function fourFiveLetterRuleEncrypt(text) {
   return words.map(word => {
     const chars = [...word];
     let letterCount = 0;
-    let firstLetterIndex = null;
+    let firstLetterIndex = 0;
     let capitalLetterPresent = false;
 
     for (let i = 0; i < chars.length; i++) {
       if (/[a-zA-ZïÏùÙãÃñÑéÉæÆ]/.test(chars[i])) {
-        if (letterCount === 0) firstLetterIndex = i;
-        if (/[A-ZÏÙÃÑÉÆ]/.test(chars[i])) capitalLetterPresent = true;
         letterCount++;
+        if (letterCount === 1) {
+          firstLetterIndex = i;
+          if (/[A-ZÏÙÃÑÉÆ]/.test(chars[i])) {
+            capitalLetterPresent = true;
+          }
+        }
       }
     }
 
-    if ((letterCount === 4 || letterCount === 5) && toggle && firstLetterIndex !== null) {
+    if ((letterCount === 4 || letterCount === 5) && toggle) {
       const insertIndex = firstLetterIndex + Math.floor(Math.random() * letterCount);
-      const insertChar = capitalLetterPresent ? 'Ç' : 'ç';
-      chars.splice(insertIndex, 0, insertChar);
+      if (insertIndex === firstLetterIndex && capitalLetterPresent) {
+        chars[firstLetterIndex] = chars[firstLetterIndex].toLowerCase();
+        chars.splice(insertIndex, 0, 'Ç');
+      } else {
+        chars.splice(insertIndex, 0, 'ç');
+      }
       toggle = !toggle;
+      return chars.join("");
     } else if ((letterCount === 4 || letterCount === 5)) {
       toggle = !toggle;
+      return chars.join("");
+    } else {
+      return chars.join("");
     }
-
-    return chars.join("");
   }).join(" ");
 }
 
